@@ -6,8 +6,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 public class SecurityConfiguration {
-    @Bean
-    public WebSecurityCustomizer webSecurityCustomizer() {
-        return (web) -> web.ignoring().anyRequest();
-    }
+    //Esto sirve cuando estamos empezando y no queremos ninguna seguridad.
+    //@Bean
+    //public WebSecurityCustomizer webSecurityCustomizer() {
+        //return (web) -> web.ignoring().anyRequest();
+    //}
 }

@@ -1,5 +1,6 @@
 package com.example.apilibreria.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,7 @@ public class Libro {
     private Integer año;
 
     //De uno a muchos a autoreslibros
+    @JsonBackReference
     @OneToMany(mappedBy = "libro", cascade = CascadeType.ALL)
     private Set<Autoresylibros> autoresylibros = new HashSet<Autoresylibros>();
 
@@ -38,15 +40,13 @@ public class Libro {
 
     }
     //Constructor con todos los campos
-    public Libro(@NotNull String titulo, @NotNull String autor, @NotNull String imagen, @NotNull String descripcion, @NotNull Integer año) {
+
+
+    public Libro(@NotNull String titulo, @NotNull String nombreautor, @NotNull String imagen, @NotNull String descripcion, @NotNull Integer año) {
         this.titulo = titulo;
         this.nombreautor = nombreautor;
         this.imagen = imagen;
         this.descripcion = descripcion;
         this.año = año;
     }
-
-
-
-
 }

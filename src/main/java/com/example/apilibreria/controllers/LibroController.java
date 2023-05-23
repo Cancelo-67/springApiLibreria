@@ -16,7 +16,7 @@ public class LibroController {
     LibroRepository libroRepository;
 
     @GetMapping("/libros/")
-    ResponseEntity<?> index() {
+    ResponseEntity<Object> index() {
         return new ResponseEntity<>(libroRepository.findAll() , HttpStatus.OK);
     }
 
@@ -25,15 +25,25 @@ public class LibroController {
         return new ResponseEntity<>(libroRepository.findById(id) , HttpStatus.OK);
     }
 
-    @PostMapping("/libros/create/")
+    @PostMapping("/libros/")
     public ResponseEntity<Object> create(@RequestBody Libro libro) {
         libroRepository.save(libro);
         return new ResponseEntity<>(libro, HttpStatus.OK);
     }
-    @DeleteMapping("/libros/delete/{id}/")
+    @DeleteMapping("/libros/{id}/")
     public ResponseEntity<Object> delete(@PathVariable("id") Long id) {
         Optional<Libro> libro = libroRepository.findById(id);
         libro.ifPresent(value -> libroRepository.delete(value));
         return new ResponseEntity<>(libro.isPresent(), HttpStatus.OK);
+    }   
+    @PutMapping("/libros/{id}/")
+    public ResponseEntity<Object> update(@PathVariable("id") Long id, @RequestBody Libro libro) {
+        Optional<Libro> oldLibro = libroRepository.findById(id);
+        if (oldLibro.isPresent()) {
+            libro.setId(id);
+            libroRepository.save(libro);
+            return new ResponseEntity<>(libro, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(false, HttpStatus.NOT_FOUND);
     }
 }
