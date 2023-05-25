@@ -40,7 +40,8 @@ public class Seeder implements CommandLineRunner {
         userRepository.save(usuario2);
         //Libro de prueba
         Libro l1 = libroRepository.save(new Libro("Titulo1", "Alejandro", "imagen prueba", "descripcion 1", 2001));
-        List<Libro> libros = libroFactory.get(9);
+        Libro l2 = libroRepository.save(new Libro("Mi libro", "Alejandro", "imagen prueba", "descripcion de mi libro", 2001));
+        List<Libro> libros = libroFactory.get(8);
         libroRepository.saveAll(libros);
         //Autor de prueba
         Autor a1 = autorRepository.save(new Autor("Alejandro","Cancelo","Hurtado","prueba imagen"));
