@@ -61,6 +61,7 @@ public class SecurityConfigurationJWT {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors().configurationSource(corsConfigurationSource()).and()
                 .csrf(AbstractHttpConfigurer::disable)
                 .userDetailsService(myUserDetailsService)
                 // authorization of preflight requests (OPTIONS)
@@ -78,6 +79,7 @@ public class SecurityConfigurationJWT {
     @Bean
     public SecurityFilterChain tokenSecurityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors().configurationSource(corsConfigurationSource()).and()
                 .securityMatcher("/token**")
                 .authorizeHttpRequests(auth -> auth.requestMatchers(HttpMethod.OPTIONS).permitAll())
                 .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())

@@ -20,9 +20,14 @@ public class LibroFactory {
             libros.add(new Libro(
                     esFaker.book().title(),
                     esFaker.book().author(),
-                    esFaker.book().publisher(),
+                    "imagen del Libro",
+                    "descripcion",
+                    esFaker.number().numberBetween(2000,2022),
                     esFaker.book().genre(),
-                    esFaker.number().numberBetween(2000,2022)));
+                    esFaker.book().publisher(),
+                    esFaker.number().randomDouble(2,1,50),
+                    esFaker.number().numberBetween(1,20)
+                    ));
 
         return libros;
     }
